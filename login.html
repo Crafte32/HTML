@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Fakebook</title>
+   <link rel="stylesheet" href="./assets/LoginCSS.css">
+</head>
+<body>
+    <div class="container">
+        <div class="login-box">
+            <div class="logo">Fakebook</div>
+            <form id="loginForm" action="page.html" method="get" onsubmit="return validateForm()">
+                <div class="input-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="input-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                <button type="submit" class="submit-button">Login</button>
+                <button type="button" class="register-button" onclick="window.location.href = 'registration.html';">Register</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function validateForm() {
+            var email = document.getElementById('email').value;
+            var password = document.getElementById('password').value;
+
+            if (email.trim() === '' || password.trim() === '') {
+                alert('Please enter your correct information.');
+                return false; // Prevent form submission
+            }
+
+            // Here, you should set the authentication status
+            // For demonstration purposes, I'm setting it to true
+            sessionStorage.setItem('authenticated', true);
+
+            return true; // Allow form submission
+        }
+    </script>
+</body>
+</html>

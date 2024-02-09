@@ -1,0 +1,152 @@
+<html>
+    <head>
+    <title>
+        Profile
+    </title>
+    </head>
+    <body>
+        <link rel="stylesheet" href="./ProfileCSS.css">
+        <div class="Main">
+        <div class="image-container">
+            <div><img src="./PostImages/Coverr.jpg" alt=""></div>
+            <div class="profileIMG"><img src="./PostImages/IMG_20240115_093531_946.jpg" alt=""></div>
+            </div>
+       
+        <div class="textt">
+            <p>UserID</p>
+        </div> 
+        <div class="texttp">
+            Posts:
+            <div style="font-size: 70px; margin-left: 100px;">
+                <div style="width:300%;">
+                    <input type="text" id="newPostInput" placeholder="Write a new post">
+                    <button onclick="addPost()">Add Post</button>
+                  </div>
+            </div>
+        </div>
+<style>
+    .post {
+      margin-bottom: 20px;
+      border: 1px solid #ccc;
+      padding: 10px;
+    }
+    .like-btn, .comment-btn {
+      cursor: pointer;
+      color: blue;
+      margin-right: 10px;
+      width:300%;
+    }
+    .likes-count {
+      font-weight: bold;
+      width:300%;
+    }
+    .comments-list {
+      list-style: none;
+      padding: 0;
+      margin-top: 10px;
+      width:300%;
+    }
+    .comment {
+      margin-bottom: 5px;
+      width:300%;
+    }
+  </style>
+</head>
+
+<div id="postsContainer"></div>
+
+
+<script>
+  // Track likes and comments for each post
+  const posts = {};
+
+  function addPost() {
+    const newPostInput = document.getElementById('newPostInput');
+    const postText = newPostInput.value.trim();
+
+    if (postText !== '') {
+      const postId = new Date().getTime(); // Use timestamp as a unique identifier
+      posts[postId] = {
+        text: postText,
+        likes: {},
+        comments: [],
+      };
+
+      renderPosts();
+      newPostInput.value = ''; // Clear the input field after adding a post
+    }
+  }
+
+  function toggleLike(postId) {
+    const post = posts[postId];
+    const userId = 'user123'; // In a real application, you would identify the user
+
+    if (post.likes[userId]) {
+      post.likes[userId] = false;
+    } else {
+      post.likes[userId] = true;
+    }
+    renderPosts();
+  }
+
+  function toggleComment(postId) {
+    const post = posts[postId];
+    const userId = 'user123'; // In a real application, you would identify the user
+
+    if (post.comments.some(comment => comment.userId === userId)) {
+      // User has already commented, remove the comment
+      post.comments = post.comments.filter(comment => comment.userId !== userId);
+    } else {
+      // User is adding a comment
+      const commentText = prompt('Add a comment:');
+      if (commentText) {
+        const comment = {
+          userId,
+          text: commentText,
+          timestamp: new Date().toLocaleString(),
+        };
+        post.comments.push(comment);
+      }
+    }
+    renderPosts();
+  }
+
+  function renderPosts() {
+    const postsContainer = document.getElementById('postsContainer');
+    postsContainer.innerHTML = ''; // Clear previous posts
+
+    for (const [postId, post] of Object.entries(posts)) {
+      const postElement = document.createElement('div');
+      postElement.className = 'post';
+      postElement.innerHTML = `
+        <p>${post.text}</p>
+        <button class="like-btn" onclick="toggleLike(${postId})">Like</button>
+        <span class="likes-count">${countLikes(post.likes)}</span> likes
+        <button class="comment-btn" onclick="toggleComment(${postId})">Comment</button>
+        <ul class="comments-list">${renderComments(post.comments)}</ul>
+      `;
+      postsContainer.appendChild(postElement);
+    }
+  }
+
+  function countLikes(likes) {
+    return Object.values(likes).filter(like => like).length;
+  }
+
+  function renderComments(comments) {
+    return comments.map(comment => `
+      <li class="comment">
+        <strong>${comment.userId}</strong>: ${comment.text}
+        <span class="timestamp">${comment.timestamp}</span>
+      </li>
+    `).join('');
+  }
+
+  // Initial rendering
+  renderPosts();
+</script>
+
+
+</body>
+
+</html>

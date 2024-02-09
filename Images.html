@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Images from URLs</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            align-items: flex-start;
+            margin: 20px;
+        }
+        .image-container {
+            width: 200px;
+            margin: 10px;
+        }
+        img {
+            width: 100%;
+            border-radius: 5px;
+        }
+        .postimg{
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="postimg">
+    <iframe src="./Names.html" frameborder="0"></iframe><br>
+<div id="images-container"></div>
+    </div>
+
+<script>
+    // Array of image URLs
+    const imageUrls = [
+        'https://i.pinimg.com/564x/71/96/57/719657d5dc51022bfa4f9843a12aa3f9.jpg',
+        'https://i.pinimg.com/564x/33/7b/fb/337bfbf458ab0f54c03c6a82f996d39c.jpg',
+        'https://images.pexels.com/photos/14622910/pexels-photo-14622910.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load',
+        'https://images.pexels.com/photos/17685567/pexels-photo-17685567/free-photo-of-a-group-of-people-riding-surfboards-in-the-ocean.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+        'https://images.pexels.com/photos/3916420/pexels-photo-3916420.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load'
+        // Add more URLs as needed
+    ];
+
+    // Function to get a random image URL from the list
+    function getRandomImageUrl() {
+        const randomIndex = Math.floor(Math.random() * imageUrls.length);
+        return imageUrls[randomIndex];
+    }
+
+    // Function to create and display random images
+    function displayRandomImages(numImages) {
+        const imagesContainer = document.getElementById('images-container');
+
+        for (let i = 0; i < numImages; i++) {
+            const imageUrl = getRandomImageUrl();
+            const imageContainer = document.createElement('div');
+            imageContainer.classList.add('image-container');
+
+            const imageElement = document.createElement('img');
+            imageElement.src = imageUrl;
+
+            imageContainer.appendChild(imageElement);
+            imagesContainer.appendChild(imageContainer);
+        }
+    }
+
+    // Generate and display 5 random images (you can adjust the number)
+    displayRandomImages(1);
+</script>
+
+</body>
+</html>

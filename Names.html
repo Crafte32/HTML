@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: black;
+            color: white;
+        }
+        .post {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            width: auto;
+        }
+    </style>
+</head>
+<body>
+
+<div id="posts-container"></div>
+
+<script>
+    // Array of random post content
+    const posts = [
+        "johm",
+        "shawn",
+        "tyro",
+        "pyro",
+        "bigballz",
+        "zamm",
+        "thundercock",
+        "bazingg",
+        "googfyt123"
+    ];
+
+    // Function to generate a random post
+    function generateRandomPost() {
+        const randomIndex = Math.floor(Math.random() * posts.length);
+        return posts[randomIndex];
+    }
+
+    // Function to create and display posts
+    function displayPosts(numPosts) {
+        const postsContainer = document.getElementById('posts-container');
+
+        for (let i = 0; i < numPosts; i++) {
+            const postContent = generateRandomPost();
+            const postElement = document.createElement('div');
+            postElement.classList.add('post');
+            postElement.textContent = postContent;
+            postsContainer.appendChild(postElement);
+        }
+    }
+
+    // Generate and display 5 random posts (you can adjust the number)
+    displayPosts(1);
+</script>
+
+</body>
+</html>

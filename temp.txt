@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Interactive Like and Comment Example</title>
+  
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ <button class="like-btn" onclick="likePost('post1')">Like</button>
+    <button class="comment-btn" onclick="toggleComments('post1')">Comment</button>
+    <div class="comment-section" id="comments_post1">
+      <input type="text" id="commentInput_post1" placeholder="Write a comment">
+      <button onclick="addComment('post1')">Add Comment</button>
+      <div id="post1_comments"></div>
+    </div>
